@@ -1,7 +1,7 @@
 'use client'
  
 import { ColumnDef } from '@tanstack/react-table'
-import { ArrowUp, ArrowDown, ArrowUpDown } from 'lucide-react'
+import { ArrowUp, ArrowDown, SquareCheckBig } from 'lucide-react'
 
 import { Button } from "@/components/ui/button"
 
@@ -90,11 +90,11 @@ export const columns: ColumnDef<Lead>[] = [
       const lead = row.original
       return (
         <Button 
-          variant="secondary"
-          className=""
+          variant="ghost"
+          className="hover:bg-transparent text-slate-500 hover:text-slate-900"
           onClick={() => console.log("Update lead", lead)}
         >
-          Update
+          <SquareCheckBig className="ml-2 h-4 w-4" />
         </Button>
       )
     },

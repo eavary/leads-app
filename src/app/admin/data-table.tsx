@@ -27,6 +27,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -86,7 +87,7 @@ export function DataTable<TData, TValue>({
           </SelectContent>
         </Select>
       </div>
-      <div className="rounded-md border">
+      <div className="rounded-3xl border">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -128,40 +129,46 @@ export function DataTable<TData, TValue>({
               </TableRow>
             )}
           </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableCell colSpan={columns.length} className="p-4 bg-white rounded-3xl" >
+                <div className="flex items-center justify-end space-x-2">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                  >
+                    <ChevronLeft />
+                  </Button>
+
+                  {/* TODO: pagination buttons, over a certain threshold there should be an ellipsis so this won't grow too large */}
+                  {Array.from({ length: table.getPageCount() }, (_, index) => (
+                    <Button
+                      key={index}
+                      variant={table.getState().pagination.pageIndex === index ? "outline" : "ghost"}
+                      className="rounded-none border-black"
+                      size="sm"
+                      onClick={() => table.setPageIndex(index)}
+                    >
+                      {index + 1}
+                    </Button>
+                  ))}
+
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                  >
+                    <ChevronRight />
+                  </Button>
+                </div>
+              </TableCell>
+            </TableRow>
+          </TableFooter>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.previousPage()}
-          disabled={!table.getCanPreviousPage()}
-        >
-          <ChevronLeft />
-        </Button>
-
-        {/* TODO: pagination buttons, over a certain threshold there should be an ellipsis so this won't grow too large */}
-        {Array.from({ length: table.getPageCount() }, (_, index) => (
-          <Button
-            key={index}
-            variant={table.getState().pagination.pageIndex === index ? "ghost" : "outline"}
-            size="sm"
-            onClick={() => table.setPageIndex(index)}
-          >
-            {index + 1}
-          </Button>
-        ))}
-
-        <Button
-          variant="outline"
-          size="sm"
-          onClick={() => table.nextPage()}
-          disabled={!table.getCanNextPage()}
-        >
-          <ChevronRight />
-        </Button>
-      </div>
-      {/* <DataTablePagination table={table} /> */}
     </div>
   )
 }
