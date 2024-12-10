@@ -61,14 +61,6 @@ export function DataTable<TData, TValue>({
     },
   })
 
-  const handleSortByStatus = (status: string) => {
-    console.log('handleSortByStatus', status)
-    const statusColumn = table.getColumn("status")
-    if (!statusColumn) return
-
-    statusColumn.setFilterValue(status)
-  }
-
   return (
     <div>
       <div className="inline-flex gap-4 items-center py-4">
@@ -81,7 +73,7 @@ export function DataTable<TData, TValue>({
           className="max-w-sm"
           startIcon={Search}
         />
-        <Select onValueChange={handleSortByStatus}>
+        <Select onValueChange={status => table.getColumn('status')?.setFilterValue(status)}>
           <SelectTrigger>
             <SelectValue placeholder="Status" />
           </SelectTrigger>

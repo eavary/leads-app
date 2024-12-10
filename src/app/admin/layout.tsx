@@ -1,5 +1,11 @@
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 
+const mockUser = {
+  name: 'Admin',
+  email: '',
+  avatar: '',
+}
+
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-screen overflow-hidden">
@@ -19,8 +25,8 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         </nav>
         <div className="flex items-center gap-2 p-6 font-bold">
           <Avatar>
-            {/* <AvatarImage src="" /> */}
-            <AvatarFallback>A</AvatarFallback>
+            <AvatarImage src={mockUser.avatar} alt={mockUser.name} />
+            <AvatarFallback>{mockUser.name.charAt(0)}</AvatarFallback>
           </Avatar>
           Admin
         </div>

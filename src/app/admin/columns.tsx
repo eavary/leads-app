@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button"
 
 import type { Lead } from "@/types/lead"
  
- 
 export const columns: ColumnDef<Lead>[] = [
   {
     accessorKey: "name",
