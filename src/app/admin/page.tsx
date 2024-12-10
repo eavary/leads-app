@@ -96,9 +96,9 @@ export default async function AdminPage() {
   const data = await getData()
 
   return (
-    <section>
-      <h1 className="text-2xl font-bold">Leeds</h1>
-      <div className="container mx-auto py-10">
+    <section className="pt-2">
+      <h1 className="text-2xl font-bold">Leads</h1>
+      <div className="container mx-auto py-4">
         <DataTable columns={columns} data={data} />
       </div>
     </section>
