@@ -9,10 +9,6 @@ body {
   font-family: 'Montserrat', Arial, sans-serif;
 }
 
-.hero {
-  background-color: #d4d99b;
-}
-
 @layer base {
   :root {
     --background: 0 0% 100%;
