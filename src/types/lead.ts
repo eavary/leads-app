@@ -1,3 +1,4 @@
+// TODO: use constants for status
 
 export type Lead = {
   id: number

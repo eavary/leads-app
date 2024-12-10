@@ -1,8 +1,34 @@
+'use client'
+
+import { useState } from 'react'
+
 import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import { Textarea } from "@/components/ui/textarea"
+
+import { JsonForms } from '@jsonforms/react'
+import { materialCells, materialRenderers } from '@jsonforms/material-renderers'
+
+import { lead } from '@/lib/form-schemas/lead'
 
 import PageSection from '@/components/assessment/page-section'
 
 export default function AssessmentPage() {
+
+  const leadSchema = lead.leadSchema
+  const leadUISchema = lead.leadUISchema
+  const leadInitialData = lead.leadData
+
+  const categoriesSchema = lead.categoriesSchema
+  const categoriesUISchema = lead.categoriesUISchema
+
+  // const moreInfoSchema = lead.moreInfoSchema
+  // const moreInfoUISchema = lead.moreInfoUISchema
+
+  const [leadData, setLeadData] = useState(leadInitialData)
+  const [categoriesData, setCategoriesData] = useState([])
+  const [moreInfoData, setMoreInfoData] = useState('')
+
   return (
     <>
       <section className="w-full hero">
@@ -28,14 +54,21 @@ export default function AssessmentPage() {
         </div>
       </section>
 
-      <section className="flex flex-col gap-8 items-center pt-10">
+      <section className="flex flex-col gap-8 items-center pt-10 pb-16">
         <PageSection
           imageSrc="/icon-info.png"
           altText="Info"
           title="Want to understand your visa options?"
           text="Submit the form below and our team of experienced attorneys will review your information and send a preliminary assessment of your case based on your goals."
         >
-          [Form]
+          <JsonForms
+            schema={leadSchema}
+            uischema={leadUISchema}
+            data={leadData}
+            renderers={materialRenderers}
+            cells={materialCells}
+            onChange={({ data, errors }) => setLeadData(data)}
+          />
         </PageSection>
 
         <PageSection
@@ -43,7 +76,14 @@ export default function AssessmentPage() {
           altText="Info"
           title="Visa categories of interest?"
         >
-          [checkboxes]
+          <JsonForms
+            schema={categoriesSchema}
+            uischema={categoriesUISchema}
+            data={categoriesData}
+            renderers={materialRenderers}
+            cells={materialCells}
+            onChange={({ data, errors }) => setCategoriesData(data)}
+          />
         </PageSection>
 
         <PageSection
@@ -51,8 +91,34 @@ export default function AssessmentPage() {
           altText="Info"
           title="How can we help you?"
         >
-          [textarea]
+          {/* this doesn't work: No applicable renderer found */}
+          {/*
+          <JsonForms
+            schema={moreInfoSchema}
+            uischema={moreInfoUISchema}
+            data={moreInfoData}
+            renderers={materialRenderers}
+            cells={materialCells}
+            onChange={({ data, errors }) => setMoreInfoData(data)}
+          />
+          */}          
+          <Textarea
+            placeholder="
+              What is your current status and when does it expire? 
+              What is your past immigration history?
+              Are you looking for long-term permanent residency or short-term employment visa or both?
+              Are there any timeline considerations?
+            "
+            className="min-h-[120px]"
+            value={moreInfoData}
+            onChange={(e) => setMoreInfoData(e.target.value)}
+          />
         </PageSection>
+
+        {/* TODO: handle form submission */}
+        <Button className="mt-8">
+          Submit
+        </Button>
       </section>
     </>
   )

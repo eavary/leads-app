@@ -10,7 +10,7 @@ interface PageSectionProps {
 
 export default function PageSection({ title, text, imageSrc, altText, children }: PageSectionProps) {
   return (
-    <div className="flex flex-col items-center max-w-lg">
+    <div className="flex flex-col items-center max-w-lg w-full">
       <Image
         src={imageSrc}
         alt={altText}
