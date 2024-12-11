@@ -65,6 +65,30 @@ body {
   }
 }
 
+.custom-input-wrapper {
+  margin: .4rem 0 !important;
+}
+.custom-input-wrapper textarea {
+  min-height: 130px !important;
+}
+.custom-input-wrapper.error input,
+.custom-input-wrapper.error textarea {
+  border-color: rgb(225, 29, 72) !important;
+}
+fieldset legend {
+  display: none !important;
+}
+
+/* 
+TODO: until i learn more about JSON Forms, 
+this will have to suffice for getting rid of the
+checbox group label
+*/
+.custom-input-wrapper.error .error-message {
+  color: rgb(225, 29, 72) !important;
+  margin-top: 4px;
+}
+
 @layer base {
   * {
     @apply border-border;

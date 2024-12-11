@@ -46,22 +46,42 @@ export const leadUISchema = {
         {
           type: 'Control',
           scope: '#/properties/firstName',
+          options: {
+            customInput: true,
+            'ui:placeholder': 'First Name',
+          },
         },
         {
           type: 'Control',
           scope: '#/properties/lastName',
+          options: {
+            customInput: true,
+            'ui:placeholder': 'Last Name',
+          },
         },
         {
           type: 'Control',
           scope: '#/properties/email',
+          options: {
+            customInput: true,
+            'ui:placeholder': 'Email',
+          },
         },
         {
           type: 'Control',
           scope: '#/properties/country',
+          options: {
+            customInput: true,
+            'ui:placeholder': 'Country',
+          },
         },
         {
           type: 'Control',
           scope: '#/properties/url',
+          options: {
+            customInput: true,
+            'ui:placeholder': 'LinkedIn or personal url',
+          },
         },
       ],
     },
@@ -92,8 +112,8 @@ export const categoriesUISchema = {
   type: 'VerticalLayout',
   elements: [
     {
-      type: "Control",
-      scope: "#/categories/multiEnum",
+      type: 'Control',
+      scope: '#/categories/multiEnum',
     },
   ]
 }
@@ -101,9 +121,9 @@ export const categoriesUISchema = {
 export const moreInfoSchema = {
   type: 'object',
   properties: {
-    multilineString: {
-      type: "string",
-      description: "Multiline Example"
+    moreInfoText: {
+      type: 'string',
+      description: 'Tell us more about your case.',
     },
   },
 }
@@ -113,9 +133,10 @@ export const moreInfoUISchema = {
   elements: [
     {
       type: 'Control',
-      scope: '#/properties/multiLineString',
+      scope: '#/properties/moreInfoText',
       options: {
-        multi: true,
+        customTextarea: true,
+        'ui:placeholder': 'What is your current status and when does it expire? What is your past immigration history? Are you looking for long-term permanent residency or short-term employment visa or both? Are there any timeline considerations?',
       }
     },
   ],
