@@ -1,5 +1,6 @@
 'use client'
- 
+
+import { format } from 'date-fns'
 import { ColumnDef } from '@tanstack/react-table'
 import { ArrowUp, ArrowDown, SquareCheckBig } from 'lucide-react'
 
@@ -47,6 +48,16 @@ export const columns: ColumnDef<Lead>[] = [
         )}
       </Button>
     ),
+    cell: ({ row }) => {
+      // submitted is a string like "2024-12-11T05:41:52.367Z", format it to "12/11/2024 5:41 AM"
+      const submittedDate = row.original.submitted
+      const formattedDate = submittedDate ? format(new Date(submittedDate), 'MM/dd/yyyy h:mm a') : 'Invalid date'
+      return (
+        <div className="flex items-center space-x-2">
+          <span>{formattedDate}</span>
+        </div>
+      )
+    },
   },
   {
     accessorKey: "status",
@@ -92,8 +103,8 @@ export const columns: ColumnDef<Lead>[] = [
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger
-                className="hover:bg-transparent text-slate-500 hover:text-slate-900"
-                onClick={() => console.log("Update lead", lead)}
+              className="hover:bg-transparent text-slate-500 hover:text-slate-900"
+              onClick={() => console.log("Update lead", lead)}
             >
               <SquareCheckBig className="ml-2 h-4 w-4" />
             </TooltipTrigger>
