@@ -1,5 +1,6 @@
 'use client'
 
+import { v4 as uuidv4 } from 'uuid'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
@@ -65,7 +66,7 @@ export default function AssessmentPage() {
   
     if (leadIsValid && categoriesIsValid && moreInfoIsValid) {
       dispatch(addLead({
-        id: Math.random().toString(36).substr(2, 9),
+        id: uuidv4(),
         firstName: leadData.firstName,
         lastName: leadData.lastName,
         name: `${leadData.firstName} ${leadData.lastName}`,

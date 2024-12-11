@@ -1,12 +1,13 @@
 import { configureStore, createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+import mockLeads from '../data/mockLeads'
 import type { Lead } from '../types/lead'
 
 // Create a slice for leads
 const leadsSlice = createSlice({
   name: 'leads',
   initialState: {
-    leads: [] as Lead[],
+    leads: mockLeads,
   },
   reducers: {
     addLead: (state, action: { payload: Lead }) => {
