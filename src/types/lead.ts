@@ -1,9 +1,15 @@
-// TODO: use constants for status
+import { STATUS } from '@/lib/constants'
 
 export type Lead = {
-  id: number
-  name: string
-  submitted: string
-  status: "Pending" | "Reached Out"
-  country: string
+  id?: string,
+  firstName: string,
+  lastName: string,
+  name: string,
+  email: string,
+  country: string,
+  url: string,
+  categories: {},
+  moreInfo: {},
+  submitted?: string,
+  status?: typeof STATUS[keyof typeof STATUS]
 }

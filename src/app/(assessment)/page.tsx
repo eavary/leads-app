@@ -1,10 +1,12 @@
 'use client'
 
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { addLead } from '@/store/store'
 
 import Image from 'next/image'
 import { Button } from '@/components/ui/button'
-import { Textarea } from "@/components/ui/textarea"
 
 import Ajv from 'ajv'
 import addFormats from 'ajv-formats'
@@ -14,6 +16,7 @@ import CustomTextareaRenderer from '@/form-renderers/CustomTextareaRenderer'
 import CustomInputRenderer from '@/form-renderers/CustomInputRenderer'
 import { customInputTester, customTextareaTester } from '@/form-renderers/testers'
 import { lead } from '@/lib/form-schemas/lead'
+import { STATUS } from '@/lib/constants'
 
 import PageSection from '@/components/assessment/page-section'
 
@@ -28,6 +31,8 @@ const renderers = [
 ]
 
 export default function AssessmentPage() {
+  const dispatch = useDispatch()
+  const router = useRouter()
 
   const leadSchema = lead.leadSchema
   const leadUISchema = lead.leadUISchema
@@ -59,11 +64,26 @@ export default function AssessmentPage() {
     const moreInfoIsValid = moreInfoValidate(moreInfoData)
   
     if (leadIsValid && categoriesIsValid && moreInfoIsValid) {
-      console.log('Form is valid')
-      console.log('leadData', leadData)
-      console.log('categoriesData', categoriesData)
-      console.log('moreInfoData', moreInfoData)
-      // TODO: Valid! Handle form submission logic here
+      dispatch(addLead({
+        id: Math.random().toString(36).substr(2, 9),
+        firstName: leadData.firstName,
+        lastName: leadData.lastName,
+        name: `${leadData.firstName} ${leadData.lastName}`,
+        email: leadData.email,
+        country: leadData.country,
+        url: leadData.url,
+        categories: categoriesData, 
+        moreInfo: moreInfoData,
+        submitted: new Date().toISOString(),
+        status: STATUS.PENDING,
+      }))
+
+      // reset the form
+      setLeadData(leadInitialData)
+      setCategoriesData({})
+      setMoreInfoData({})
+
+      router.push('/thanks')
     } else {
       // TODO: Handle form validation errors here
     }
@@ -141,9 +161,11 @@ export default function AssessmentPage() {
               onChange={({ data, errors }) => setMoreInfoData(data)}
             />
           </PageSection>
-          <Button type="submit" className="mt-8">
-            Submit
-          </Button>
+          <div className="flex justify-center">
+            <Button type="submit" className="mt-8 px-16">
+              Submit
+            </Button>
+          </div>
         </form>
       </section>
     </>

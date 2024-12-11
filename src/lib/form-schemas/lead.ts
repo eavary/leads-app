@@ -142,12 +142,21 @@ export const moreInfoUISchema = {
   ],
 }
 
+// testing
+// export const leadData = {
+//   firstName: 'John',
+//   lastName: 'Doe',
+//   email: 'john.doe@test.com',
+//   country: 'United States',
+//   url: 'http://www.test.com',
+// }
+
 export const leadData = {
-  firstName: 'John',
-  lastName: 'Doe',
-  email: 'john.doe@test.com',
-  country: 'United States',
-  url: 'http://www.test.com',
+  firstName: '',
+  lastName: '',
+  email: '',
+  country: '',
+  url: '',
 }
 
 export const lead = {

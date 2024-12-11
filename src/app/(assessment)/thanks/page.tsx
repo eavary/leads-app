@@ -21,6 +21,11 @@ export default function AssessmentThanksPage() {
           Go Back to Homepage
         </Button>
       </Link>
+      <Link href="/admin" className="mt-6">
+        <Button className="px-16">
+          Admin
+        </Button>
+      </Link>
     </div>
   )
 }

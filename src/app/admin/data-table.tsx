@@ -1,6 +1,6 @@
 'use client'
-
 import { useState } from 'react'
+
 import { Button } from '@/components/ui/button'
 import {
   Select,
@@ -32,16 +32,14 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
+import { STATUS } from '@/lib/constants'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
 }
 
-export function DataTable<TData, TValue>({
-  columns,
-  data,
-}: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([])
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
     []
@@ -79,7 +77,7 @@ export function DataTable<TData, TValue>({
             <SelectValue placeholder="Status" />
           </SelectTrigger>
           <SelectContent>
-            {["Pending", "Reached Out"].map((status) => (
+            {Object.keys(STATUS).map((status) => (
               <SelectItem key={status} value={status}>
                 {status}
               </SelectItem>
@@ -107,6 +105,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             ))}
           </TableHeader>
+
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => (
@@ -129,6 +128,7 @@ export function DataTable<TData, TValue>({
               </TableRow>
             )}
           </TableBody>
+
           <TableFooter>
             <TableRow>
               <TableCell colSpan={columns.length} className="p-4 bg-white rounded-3xl" >
